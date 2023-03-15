@@ -25,7 +25,7 @@ def getImageAndLabels():
         pil_img = Image.open(imagePaths).convert('L')
         img_numpy = np.array(pil_img, 'uint8')
 
-        face_detector = cv2.CascadeClassifier('D:/opencv/sources/data/haarcascades/haarcascade_frontalface_alt2.xml')
+        face_detector = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
         face = face_detector.detectMultiScale(img_numpy)
 
         id = int(os.path.split(imagePaths)[1].split('.')[0])
