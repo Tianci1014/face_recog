@@ -10,6 +10,7 @@ def face_detect_demo(img):
     :return:
     """
 
+    global confidence
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     face_detector = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
     # 提取人脸的位置,并限定人脸大小100*100~300*300
@@ -29,12 +30,9 @@ def face_detect_demo(img):
             cv2.putText(img, 'unkonw', (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
             cv2.putText(img, str(confidence), (x + 10, y + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
         else:
-            # 识别成功，显示出识别结果和置信评分
-            print('识别成功')
             cv2.putText(img, str(names[ids - 1]), (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
             cv2.putText(img, str(confidence), (x + 10, y + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
     cv2.imshow('result', img)
-
 
 
 def name():
@@ -61,6 +59,7 @@ if __name__ == '__main__':
             print("camera not working")
             break
         face_detect_demo(frame)
+
         if ord(' ') == cv2.waitKey(10):
             break
     cv2.destroyAllWindows()
