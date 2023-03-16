@@ -2,17 +2,23 @@ import cv2
 import os
 
 import numpy as np
+import text_in
 
+"""
+此文件用于向数据库添加人脸信息
+"""
 
 def image_name():
     """
     获取新增人脸的文件名（即人脸的label）
     :return: (文件名，ID)
     """
+
     path = "./facemessage"
     files = os.listdir(path)
     num = len(files)
-    name = input('please enter your name:')
+    # name = input('please enter your name:')
+    name = text_in.collect_name()
     id = num + 1
     image_name = str(id) + '.' + name + '.png'
     return image_name, id

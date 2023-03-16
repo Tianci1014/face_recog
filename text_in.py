@@ -1,29 +1,36 @@
 import tkinter as tk
+import time
 
-root = tk.Tk()
+def collect_name():
+    """
+    弹出输入框提示
+    :return: 所输入的文本
+    """
+    name = ''
 
-# 设置标签信息
-label1 = tk.Label(root, text='战队名称：')
-label1.grid(row=0, column=0)
-label2 = tk.Label(root, text='选手名字：')
-label2.grid(row=1, column=0)
+    root = tk.Tk()
 
-# 创建输入框
-entry1 = tk.Entry(root)
-entry1.grid(row=0, column=1, padx=10, pady=5)
-entry2 = tk.Entry(root)
-entry2.grid(row=1, column=1, padx=10, pady=5)
+    # 设置标签信息
+    label1 = tk.Label(root, text='请输入姓名：')
+    label1.grid(row=0, column=0)
 
+    # 创建输入框
+    entry1 = tk.Entry(root)
+    entry1.grid(row=0, column=1, padx=10, pady=5)
 
-# 创建按键
-def show():
-    print('战队名称：%s' % entry1.get())
-    print('选手名称：%s' % entry2.get())
+    # 创建按键
+    def reutrn_name():
+        global name
+        name = entry1.get()
+        return name
 
+    tk.Button(root, text='获取信息', command=reutrn_name).grid(row=3, column=0, sticky=tk.W, padx=30, pady=5)
+    tk.Button(root, text='退出', command=root.quit).grid(row=3, column=1, sticky=tk.E, padx=30, pady=5)
 
-button1 = tk.Button(root, text='获取信息', command=show).grid(row=3, column=0,
-                                                              sticky=tk.W, padx=30, pady=5)
-button2 = tk.Button(root, text='退出', command=root.quit).grid(row=3, column=1,
-                                                               sticky=tk.E, padx=30, pady=5)
+    tk.mainloop()
+    name = reutrn_name()
+    return name
 
-tk.mainloop()
+if __name__ == '__main__':
+    name = collect_name()
+    print(name)
