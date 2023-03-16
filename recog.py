@@ -42,8 +42,8 @@ def name():
     """
     path = './facemessage'
 
-    imagePaths = [os.path.join(path, f) for f in os.listdir(path)]
-    for imagePath in imagePaths:
+    image_paths = [os.path.join(path, f) for f in os.listdir(path)]
+    for imagePath in image_paths:
         name = str(os.path.split(imagePath)[1].split('.', 2)[1])
         names.append(name)
 
