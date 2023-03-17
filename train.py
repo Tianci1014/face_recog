@@ -34,11 +34,11 @@ def getImageAndLabels():
         face_detector = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
         face = face_detector.detectMultiScale(img_numpy)
 
-        ids = int(os.path.split(imagePaths)[1].split('.')[0])
+        id = int(os.path.split(imagePaths)[1].split('.')[0])
 
         #  x, y, w, h给出了人脸的位置信息
         for x, y, w, h in face:
-            ids.append(ids)
+            ids.append(id)
             face_samples.append(img_numpy[y:y + h, x:x + w])
     # 打印id和面部特征
     # print('id:', id)

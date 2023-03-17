@@ -1,6 +1,7 @@
 import cv2
 import os
 
+
 def face_detect_demo(img):
     """
     对图像进行识别
@@ -16,7 +17,7 @@ def face_detect_demo(img):
 
     for x, y, w, h in face:
         # 框出人脸位置
-        cv2.rectangle(img, (x, y), (x + w, y + h), color=(0, 0, 255), thickness=1)
+        cv2.rectangle(img, (x, y), (x + w, y + h), color=(0, 0, 255), thickness=2)
 
         recognizer = cv2.face.LBPHFaceRecognizer_create()
         recognizer.read('trainer/trainer.yml')
@@ -39,7 +40,6 @@ def name():
     :return:
     """
     path = './facemessage'
-
     image_paths = [os.path.join(path, f) for f in os.listdir(path)]
     for imagePath in image_paths:
         name = str(os.path.split(imagePath)[1].split('.', 2)[1])

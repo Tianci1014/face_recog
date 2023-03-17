@@ -23,7 +23,7 @@ while 1:
         # 从图像中返回裁剪后的人脸。
         roi_gray = gray[y:y + h, x:x + w]
         roi_color = img[y:y + h, x:x + w]
-        #打印矩形框中心位置坐标
+        # 打印矩形框中心位置坐标
         print(int(x + w / 2), int(y + h / 2))
 
     cv2.imshow('img', img)
