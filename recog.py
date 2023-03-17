@@ -1,8 +1,6 @@
 import cv2
 import os
 
-
-# 对输入进行识别
 def face_detect_demo(img):
     """
     对图像进行识别

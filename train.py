@@ -1,3 +1,7 @@
+"""
+此文件用于更新照片库的识别信息，对所有照片进行重新扫描与识别，产生所有人脸及对应标签，并以此训练，生成特征数据
+"""
+
 import datetime
 import os
 from os import listdir
@@ -5,9 +9,7 @@ import cv2
 from PIL import Image
 import numpy as np
 
-"""
-此文件用于更新照片库的识别信息，对所有照片进行重新扫描与识别，产生所有人脸及对应标签，并以此训练，生成特征数据
-"""
+
 
 
 def getImageAndLabels():

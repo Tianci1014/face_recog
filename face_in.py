@@ -1,12 +1,12 @@
+"""
+此文件用于向数据库添加人脸信息
+"""
 import cv2
 import os
 
 import numpy as np
 import text_in
 
-"""
-此文件用于向数据库添加人脸信息
-"""
 
 def image_name():
     """
