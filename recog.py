@@ -1,10 +1,10 @@
 import cv2
 import os
-
+import servo
 
 def face_detect_demo(img):
     """
-    对图像进行识别
+    对摄像头人脸进行识别
     :param img:图像
     :return:
     """
@@ -25,12 +25,14 @@ def face_detect_demo(img):
 
         # print('标签id:', ids, '置信评分:', confidence)
 
-        if confidence > 80:
-            cv2.putText(img, 'unkonw', (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
+        if confidence > 70:
+            cv2.putText(img, 'unkonw,无法开门', (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
             cv2.putText(img, str(confidence), (x + 10, y + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
+
         else:
             cv2.putText(img, str(names[ids - 1]), (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
             cv2.putText(img, str(confidence), (x + 10, y + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 1)
+            servo.moveDoor()
     cv2.imshow('result', img)
 
 

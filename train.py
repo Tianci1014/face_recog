@@ -59,4 +59,5 @@ def train():
 
 
 if __name__ == '__main__':
-    train()
+    for i in range(10):
+        train()

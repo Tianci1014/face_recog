@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 
+
 def collect_name():
     """
     弹出输入框提示
@@ -11,8 +12,12 @@ def collect_name():
     root = tk.Tk()
 
     # 设置标签信息
-    label1 = tk.Label(root, text='请输入姓名：')
+
+    label1 = tk.Label(root, text='请输入姓名拼音：')
     label1.grid(row=0, column=0)
+
+    label2 = tk.Label(root, text='输入完成后先点击确认再点击退出')
+    label2.grid()
 
     # 创建输入框
     entry1 = tk.Entry(root)
@@ -24,12 +29,13 @@ def collect_name():
         name = entry1.get()
         return name
 
-    tk.Button(root, text='获取信息', command=reutrn_name).grid(row=3, column=0, sticky=tk.W, padx=30, pady=5)
+    tk.Button(root, text='确定', command=reutrn_name).grid(row=3, column=0, sticky=tk.W, padx=30, pady=5)
     tk.Button(root, text='退出', command=root.quit).grid(row=3, column=1, sticky=tk.E, padx=30, pady=5)
 
     tk.mainloop()
     name = reutrn_name()
     return name
+
 
 if __name__ == '__main__':
     name = collect_name()
