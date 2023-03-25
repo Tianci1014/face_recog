@@ -1,63 +1,48 @@
-"""
-此文件用于更新照片库的识别信息，对所有照片进行重新扫描与识别，产生所有人脸及对应标签，并以此训练，生成特征数据
-"""
 
 import datetime
 import os
-from os import listdir
 import cv2
 from PIL import Image
 import numpy as np
 
 
-
-
-def getImageAndLabels():
+def getImageAndLabels(path):
     """
-    对数据库所有照片进行
+    将照片组交给级联分类器，级联分类器给出人脸数组与标签
     :return: 人脸数组，标签
     """
 
-    # 人脸数组列表和标签列表
     face_samples = []
     ids = []
 
-    path = "./facemessage"
-    imagePaths = [os.path.join(path, f) for f in listdir(path)]
+    for imagePaths in os.listdir(path):
 
-    # 遍历列表中的图片
-    for imagePaths in imagePaths:
-
-        pil_img = Image.open(imagePaths).convert('L')
+        pil_img = Image.open(os.path.join(path, imagePaths)).convert('L')
         img_numpy = np.array(pil_img, 'uint8')
 
         face_detector = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
         face = face_detector.detectMultiScale(img_numpy)
 
-        id = int(os.path.split(imagePaths)[1].split('.')[0])
+        id = int(imagePaths.split('.')[0])
 
-        #  x, y, w, h给出了人脸的位置信息
         for x, y, w, h in face:
             ids.append(id)
             face_samples.append(img_numpy[y:y + h, x:x + w])
-    # 打印id和面部特征
-    # print('id:', id)
-    # print('fs:', faceSamples)
+
     return face_samples, ids
 
 
-def train():
+def train(face_samples, ids):
     """
-    自动获取数据并训练，生成识别文件
+    将样本与标签交给训练器训练，训练器生成存有特征数据的文件
     :return:
     """
-    face_samples, ids = getImageAndLabels()
-
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.train(face_samples, np.array(ids))
     recognizer.write('trainer/trainer.yml')
 
 
 if __name__ == '__main__':
-    for i in range(10):
-        train()
+    path = "./facemessage"
+    face_samples, ids = getImageAndLabels(path)
+    train(face_samples, ids)
